@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.weiyu.handsomerunner.view.DataEntryActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="10dip"
+        android:orientation="vertical"
+        >
+        <EditText
+            android:id="@+id/et_age"
+            android:hint="Age"
+            android:inputType="number"
+            android:singleLine="true"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <RadioGroup
+            android:id="@+id/rg_gender"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <RadioButton
+                android:id="@+id/rb_male"
+                android:layout_width="0dip"
+                android:layout_weight="1"
+                android:text="Male"
+                android:checked="true"
+                android:layout_height="wrap_content" />
+
+            <RadioButton
+                android:id="@+id/rb_female"
+                android:layout_width="0dip"
+                android:layout_weight="1"
+                android:text="Female"
+                android:layout_height="wrap_content" />
+
+        </RadioGroup>
+        <EditText
+            android:id="@+id/et_height"
+            android:hint="@string/height_in_inches"
+            android:inputType="numberDecimal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+
+        <EditText
+            android:id="@+id/et_weight"
+            android:hint="@string/weight_in_pounds"
+            android:inputType="numberDecimal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dip"
+            android:layout_marginBottom="15dip"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="0dip"
+                android:layout_weight="1"
+                android:textSize="17sp"
+                android:textColor="@color/black"
+                android:layout_height="wrap_content"
+                android:text="@string/activity_level"
+                android:layout_gravity="center_vertical"
+                />
+
+            <Spinner
+                android:id="@+id/sp_level"
+                android:layout_width="0dip"
+                android:layout_weight="2"
+                android:layout_height="wrap_content"
+                android:entries="@array/levels"
+                />
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/bt_sign_up"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="SIGN UP"
+            />
+
+    </LinearLayout>
+</LinearLayout>

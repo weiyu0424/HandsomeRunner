@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:id="@+id/navigation_bar"
+    android:layout_alignParentBottom="true"
+    android:background="#ffffff"
+    android:layout_width="match_parent"
+    android:layout_height="50dip"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <LinearLayout
+        android:id="@+id/home_page"
+        android:layout_width="0dip"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/iv_tab_home"
+            android:layout_width="20dip"
+            android:layout_height="20dip"
+            android:src="@mipmap/icon_home" />
+
+        <TextView
+            android:id="@+id/tv_home"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#666666"
+            android:text="Home" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/calorie_track_page"
+        android:gravity="center"
+        android:layout_width="0dip"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/iv_tab_calorie_track"
+            android:layout_width="20dip"
+            android:layout_height="20dip"
+            android:src="@mipmap/icon_calorie_track" />
+
+        <TextView
+            android:id="@+id/tv_calorie_track"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#666666"
+            android:text="Calorie Track" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/progress_report_page"
+        android:gravity="center"
+        android:layout_width="0dip"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/iv_tab_progress_report"
+            android:layout_width="20dip"
+            android:layout_height="20dip"
+            android:src="@mipmap/icon_report" />
+
+        <TextView
+            android:id="@+id/tv_progress_report"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#666666"
+            android:text="Progress Report" />
+    </LinearLayout>
+
+
+</LinearLayout>

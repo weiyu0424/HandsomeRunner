@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="levels">
+        <item>Extremely inactive</item>
+        <item>Sedentary </item>
+        <item>Moderately active</item>
+        <item>Vigorously active</item>
+        <item>Extremely active</item>
+    </string-array>
+</resources>
