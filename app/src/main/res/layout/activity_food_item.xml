@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#aae6e6e6"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context="com.weiyu.handsomerunner.view.FoodItemActivity">
     <android.support.design.widget.AppBarLayout
@@ -20,5 +21,33 @@
 
     </android.support.design.widget.AppBarLayout>
 
+    <LinearLayout
+        android:id="@+id/ll_food_items"
+        android:layout_centerInParent="true"
+        android:orientation="vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:id="@+id/iv_load_of_food_items"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:src="@mipmap/icon_load"/>
+        <TextView
+            android:id="@+id/tv_load_of_food_items"
+            android:layout_gravity="center_horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:textColor="@color/home_color"
+            android:layout_marginTop="5dip"
+            android:text="正在努力加载中，请稍后哒"/>
+    </LinearLayout>
 
+
+    <ListView
+        android:id="@+id/lv_food_items"
+        android:layout_below="@+id/app_bar_layout"
+        android:divider="@null"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
 </RelativeLayout>

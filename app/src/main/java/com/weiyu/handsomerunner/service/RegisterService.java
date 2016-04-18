@@ -1,4 +1,4 @@
-package com.weiyu.handsomerunner.serice;
+package com.weiyu.handsomerunner.service;
 
 import com.weiyu.handsomerunner.Config;
 import com.weiyu.handsomerunner.domain.User;

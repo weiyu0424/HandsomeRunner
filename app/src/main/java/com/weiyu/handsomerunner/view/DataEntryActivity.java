@@ -14,7 +14,7 @@ import com.weiyu.handsomerunner.Config;
 import com.weiyu.handsomerunner.R;
 import com.weiyu.handsomerunner.db.DBUserHandler;
 import com.weiyu.handsomerunner.domain.User;
-import com.weiyu.handsomerunner.serice.RegisterService;
+import com.weiyu.handsomerunner.service.RegisterService;
 
 import org.json.JSONException;
 import org.json.JSONObject;

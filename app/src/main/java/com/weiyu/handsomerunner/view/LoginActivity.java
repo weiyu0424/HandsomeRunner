@@ -11,7 +11,7 @@ import android.widget.TextView;
 
 import com.weiyu.handsomerunner.Config;
 import com.weiyu.handsomerunner.R;
-import com.weiyu.handsomerunner.serice.LoginService;
+import com.weiyu.handsomerunner.service.LoginService;
 
 import org.json.JSONException;
 import org.json.JSONObject;
