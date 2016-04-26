@@ -2,9 +2,11 @@
 <resources>
     <color name="colorPrimary">#4CAF50</color>
     <color name="home_color">#4CAF50</color>
+    <color name="home_color_pressed">#379b3b</color>
     <color name="colorPrimaryDark">#2E7D32</color>
     <color name="colorAccent">#FF4081</color>
     <color name="black">#000000</color>
-    <color name="normal_color">#afafaf</color>
+    <color name="normal_color">#787878</color>
+    <color name="normal_background">#ececec</color>
     <color name="white">#ffffff</color>
 </resources>

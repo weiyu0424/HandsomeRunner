@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:background="@color/normal_background"
+    tools:context="com.weiyu.handsomerunner.view.FoodDetailActivity">
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/app_bar_layout"
+        android:theme="@style/AppTheme.AppBarOverlay">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            app:popupTheme="@style/AppTheme.PopupOverlay" />
+
+    </android.support.design.widget.AppBarLayout>
+    <RelativeLayout
+        android:background="@drawable/bg_food_detail"
+        android:layout_width="match_parent"
+        android:layout_height="180dip">
+        <ImageView
+            android:id="@+id/iv_food_image"
+            android:layout_width="120dip"
+            android:layout_height="120dip"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="10dip"
+            android:scaleType="fitXY"
+            android:src="@drawable/drinks1"/>
+
+        <TextView
+            android:id="@+id/tv_foodName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="foodName"
+            android:layout_toRightOf="@+id/iv_food_image"
+            android:layout_marginTop="5dip"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            />
+
+        <TextView
+            android:id="@+id/tv_food_parameters"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_foodName"
+            android:layout_toRightOf="@+id/iv_food_image"
+            android:layout_marginTop="5dip"
+            android:text="food parameters"/>
+
+        <TextView
+            android:id="@+id/tv_food_description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_food_parameters"
+            android:layout_toRightOf="@+id/iv_food_image"
+            android:layout_marginTop="5dip"
+            android:textColor="@color/black"
+            android:text="food description"/>
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/tv_display_info"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dip"
+        android:textSize="16sp"
+        android:layout_marginLeft="10dip"
+        android:textColor="#aa000000"
+        android:text="Food details"/>
+    <ListView
+        android:id="@+id/lv_food_detail"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:divider="@null"/>
+</LinearLayout>

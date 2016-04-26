@@ -8,7 +8,7 @@ import android.database.sqlite.SQLiteOpenHelper;
  * created by Sam on 4/14/2016
  */
 public class DBHelper extends SQLiteOpenHelper {
-
+    public static final int VERSION = 2;
     public static final String DATABASE_NAME = "id27315932";
     public static final String CREATE_TABLE_USER = "CREATE TABLE IF NOT EXISTS user(" +
             "_id integer primary key autoincrement," +
@@ -25,18 +25,36 @@ public class DBHelper extends SQLiteOpenHelper {
             "longitude double null default 180" +
             ");";
 
+
+    public static final String CREATE_TABLE_CALORIE_GOAL = "CREATE TABLE IF NOT EXISTS calorie_goal(" +
+            "_id integer primary key autoincrement," +
+            "userName varchar(50) not null," +
+            "calorie double not null," +
+            "updateTime varchar(50) not null" +
+            ");";
+
+
+    public static final String CREATE_TABLE_STEPS = "CREATE TABLE IF NOT EXISTS steps_record(" +
+            "_id integer primary key autoincrement," +
+            "userName varchar(50) not null," +
+            "steps int not null," +
+            "updateTime datetime default CURRENT_TIMESTAMP not null" +
+            ");";
+
     public DBHelper(Context context) {
-        super(context, DATABASE_NAME, null, 1);
+        super(context, DATABASE_NAME, null, VERSION);
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
         //create a user table
         db.execSQL(CREATE_TABLE_USER);
+        db.execSQL(CREATE_TABLE_CALORIE_GOAL);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-
+        System.out.println("on upgrade");
+        db.execSQL(CREATE_TABLE_STEPS);
     }
 }

@@ -35,4 +35,8 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="description">\u3000\u3000This app is created by Sam, and it can help you to be more healthy. Whether you want to lose weight or put on weight. we will make an efficient plan for you with advanced algorithms. </string>
+    <string name="history">history</string>
+    <string name="edit">EDIT</string>
+    <string name="set_steps">Set Steps</string>
+    <string name="calculate">Calculate</string>
 </resources>

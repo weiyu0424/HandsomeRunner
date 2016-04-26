@@ -28,7 +28,7 @@ public class NetConnection {
      * @param params: the relevant parameters which need to be passed to the server api
      */
     public NetConnection(final String url, final HttpMethod method, final ConnectionCallback callback, final String ... params){
-//        final String myurl = "http://172.16.120.11:8080/CaloriesServer/webresources/user/register/";
+//        final String myurl = "http://172.16.120.11:8080/CaloriesServer/webresources/user/login/Sam/Sam";
         //open a child thread to do the network communication
         new AsyncTask<Void, Void, String>() {
 
@@ -72,9 +72,6 @@ public class NetConnection {
                     return result.toString();
                 } catch (IOException e) {
                     e.printStackTrace();
-                    if(callback != null){
-                        callback.onFail();
-                    }
                 }finally {
                     if(reader != null){
                         try {

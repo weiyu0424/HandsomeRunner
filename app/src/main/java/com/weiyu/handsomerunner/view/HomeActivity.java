@@ -1,11 +1,13 @@
 package com.weiyu.handsomerunner.view;
 
+import android.content.Intent;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -138,9 +140,9 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         }
 
         //after selecting the menu item, we should close the drawer layout
-        if(drawer.isDrawerOpen(GravityCompat.START)){
+        /*if(drawer.isDrawerOpen(GravityCompat.START)){
             drawer.closeDrawer(GravityCompat.START);
-        }
+        }*/
 
         return false;
     }
@@ -177,19 +179,6 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             transaction.hide(progressReportFragment);
         }
 
-        if(calorieGoalFragment != null){
-            transaction.hide(calorieGoalFragment);
-        }
-
-        if(stepsFragment != null){
-            transaction.hide(stepsFragment);
-        }
-
-        if(nearByFragment != null){
-            transaction.hide(nearByFragment);
-        }
-
-
     }
 
     /**
@@ -197,13 +186,17 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
      * @param index: the index which need to display in the FrameLayout Widget
      */
     private void setTabSelection(int index){
+        Intent intent = null;
         //set the ImageView as normal image and set TextView as normal color
-
         FragmentTransaction transaction = fm.beginTransaction();
         hideFragment(transaction);
+        ActionBar actionBar = getSupportActionBar();
         switch (index){
             case 0:
                 clearTextColor();
+                if(actionBar != null) {
+                    actionBar.setTitle("Runner");
+                }
                 tvHome.setTextColor(getResources().getColor(R.color.home_color));
                 ivTabHome.setImageResource(R.mipmap.icon_home_pressed);
                 if (homeFragment == null) {
@@ -216,6 +209,9 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                 break;
             case 1:
                 clearTextColor();
+                if(actionBar != null) {
+                    actionBar.setTitle("Calorie Track");
+                }
                 tvCalorieTrack.setTextColor(getResources().getColor(R.color.home_color));
                 ivTabCalorieTrack.setImageResource(R.mipmap.icon_calorie_track_pressed);
                 if (calorieTrackFragment == null) {
@@ -228,6 +224,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                 break;
             case 2:
                 clearTextColor();
+                getSupportActionBar().setTitle("Progress Report");
 //                tintManager.setStatusBarTintResource(R.color.user_color);
                 tvProgressReport.setTextColor(getResources().getColor(R.color.home_color));
                 ivTabProgressReport.setImageResource(R.mipmap.icon_report_pressed);
@@ -241,31 +238,39 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                 break;
 
             case 3:
-                if (calorieGoalFragment == null) {
+                /*if (calorieGoalFragment == null) {
                     calorieGoalFragment = new CalorieGoalFragment();
 //                    discoverFragment = new DiscoverFragment();
                     transaction.add(R.id.fl_container, calorieGoalFragment);
                 }else {
                     transaction.show(calorieGoalFragment);
-                }
+                }*/
+
+                intent = new Intent(this,CalorieGoalActivity.class);
+                startActivity(intent);
                 break;
             case 4:
-                if (stepsFragment == null) {
+                intent = new Intent(this,StepsActivity.class);
+                startActivity(intent);
+                /*if (stepsFragment == null) {
                     stepsFragment = new StepsFragment();
 //                    discoverFragment = new DiscoverFragment();
                     transaction.add(R.id.fl_container, stepsFragment);
                 }else {
                     transaction.show(stepsFragment);
-                }
+                }*/
                 break;
             case 5:
-                if (nearByFragment == null) {
+                /*if (nearByFragment == null) {
                     nearByFragment = new NearByFragment();
 //                    discoverFragment = new DiscoverFragment();
                     transaction.add(R.id.fl_container, nearByFragment);
                 }else {
                     transaction.show(nearByFragment);
-                }
+                }*/
+
+                intent = new Intent(this,NearByActivity.class);
+                startActivity(intent);
                 break;
         }
         transaction.commit();
@@ -289,5 +294,12 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                 setTabSelection(2);
                 break;
         }
+    }
+
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        setTabSelection(0);
     }
 }

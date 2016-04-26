@@ -6,60 +6,118 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
+import com.weiyu.handsomerunner.Config;
 import com.weiyu.handsomerunner.R;
+import com.weiyu.handsomerunner.network.NetworkUtils;
+import com.weiyu.handsomerunner.service.GoaledCalorieService;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link CalorieTrackFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.text.DecimalFormat;
+
 public class CalorieTrackFragment extends Fragment {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
-
+    private TextView tvCalorieGoalDescription = null;
+    private TextView tvCalorieGoal = null;
+    private View view = null;
+    private TextView tvSteps = null;
+    private TextView tvConsumedCalorie = null;
+    private TextView tvBurnedCalorie = null;
     public CalorieTrackFragment() {
+
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment CalorieTrackFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static CalorieTrackFragment newInstance(String param1, String param2) {
-        CalorieTrackFragment fragment = new CalorieTrackFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_calorie_track, container, false);
+        view = inflater.inflate(R.layout.fragment_calorie_track, container, false);
+        initView();
+        initData();
+        return view;
     }
 
+    private void initView() {
+        tvCalorieGoalDescription = (TextView) view.findViewById(R.id.tv_calorie_goal_description);
+        tvCalorieGoal = (TextView) view.findViewById(R.id.tv_calorie_goal);
+        tvConsumedCalorie = (TextView) view.findViewById(R.id.tv_calorie_consumed);
+        tvBurnedCalorie = (TextView) view.findViewById(R.id.tv_calorie_burned);
+        tvSteps = (TextView) view.findViewById(R.id.tv_steps_of_calorie_track);
+    }
+
+
+
+    private void initData() {
+        //set steps
+        int totalSteps = Config.getTotalSteps(getActivity());
+        tvSteps.setText(String.valueOf(totalSteps));
+
+        if(NetworkUtils.isNetworkAvailable(getActivity())){
+            GoaledCalorieService goaledCalorieService = new GoaledCalorieService();
+            /**
+             * get goaled calorie
+             */
+            goaledCalorieService.getGoaledCalorie(Config.getUserName(getActivity()), Config.today(), new GoaledCalorieService.GoaledCalorieCallback() {
+                @Override
+                public void onSuccess(Object obj) {
+                    String goaledCalorie = (String) obj;
+                    tvCalorieGoal.setText(goaledCalorie);
+                }
+
+                @Override
+                public void onFail() {
+
+                }
+
+                @Override
+                public void onEmpty() {
+
+                }
+            });
+
+
+            /**
+             * get consumed calorie
+             */
+            goaledCalorieService.getConsumedAndBurnedCalories("Alex", "2016-03-24", new GoaledCalorieService.GoaledCalorieCallback() {
+                @Override
+                public void onSuccess(Object obj) {
+                    String result = (String) obj;
+                    try {
+                        JSONObject jsonObject = new JSONObject(result);
+                        String consumedCalories = jsonObject.getString("consumedCalories");
+                        String burnedCalories = jsonObject.getString("burnedCalories");
+                        System.out.println(consumedCalories + ":" + burnedCalories);
+                        DecimalFormat df = new DecimalFormat("0.00");
+                        tvConsumedCalorie.setText(df.format(Double.parseDouble(consumedCalories)));
+                        tvBurnedCalorie.setText(df.format(Double.parseDouble(burnedCalories)));
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+                @Override
+                public void onFail() {
+
+                }
+
+                @Override
+                public void onEmpty() {
+
+                }
+            });
+
+        }else{
+            Config.toast(getActivity(),"Oops, current network does not work!");
+        }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        initData();
+    }
 }

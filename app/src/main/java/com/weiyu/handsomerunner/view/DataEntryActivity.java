@@ -100,6 +100,7 @@ public class DataEntryActivity extends AppCompatActivity implements View.OnClick
 
             //register a user account
             RegisterService registerService = new RegisterService();
+
             registerService.register(user, new RegisterService.RegisterCallback() {
                 @Override
                 public void onSuccess(String result) {

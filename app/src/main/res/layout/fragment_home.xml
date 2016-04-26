@@ -46,11 +46,20 @@
             android:text="@string/description"/>
 
     </RelativeLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dip"
+        android:layout_marginTop="10dip"
+        android:textSize="16sp"
+        android:text="Choose your daily diet"/>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dip"
         android:orientation="vertical"
-        android:layout_margin="10dip"
+        android:layout_marginLeft="10dip"
+        android:layout_marginRight="10dip"
         android:layout_weight="1">
         <LinearLayout
             android:layout_width="match_parent"

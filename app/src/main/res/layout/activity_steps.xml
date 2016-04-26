@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/normal_background"
+    tools:context="com.weiyu.handsomerunner.view.StepsActivity">
+
+    <include layout="@layout/steps_header" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/rl_set_steps_header">
+
+        <TextView
+            android:id="@+id/tv_add_steps_hint"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/rl_set_steps_header"
+            android:layout_marginLeft="5dip"
+            android:layout_marginTop="20dip"
+            android:text="Add steps"
+            android:textColor="#000000"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <LinearLayout
+            android:id="@+id/ll_steps_add"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_add_steps_hint"
+            android:layout_marginTop="8dip"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/et_steps_add"
+                android:layout_width="0dip"
+                android:layout_height="40dip"
+                android:layout_marginLeft="5dip"
+                android:layout_marginRight="5dip"
+                android:layout_weight="3"
+                android:background="@drawable/bg_edit_text_add"
+                android:hint="steps you have taken"
+                android:paddingLeft="10dip" />
+
+            <Button
+                android:id="@+id/bt_steps_add"
+                android:layout_width="0dip"
+                android:layout_height="40dip"
+                android:layout_marginRight="5dip"
+                android:layout_weight="1"
+                android:background="@drawable/bg_calorie_goal_add"
+                android:text="ADD"
+                android:textColor="@color/white" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tv_steps_record"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/ll_steps_add"
+            android:layout_marginLeft="5dip"
+            android:layout_marginTop="10dip"
+            android:text="Steps Record"
+            android:textColor="#cc000000"
+            android:textSize="16sp" />
+
+        <ListView
+            android:id="@+id/lv_steps_record"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/tv_steps_record"
+            android:layout_marginTop="5dip"
+            android:divider="@null" />
+
+
+        <RelativeLayout
+            android:id="@+id/rl_steps_show"
+            android:layout_width="250dip"
+            android:layout_height="250dip"
+            android:layout_centerInParent="true"
+            android:layout_marginTop="40dip"
+            android:background="@drawable/bg_calorie"
+            android:visibility="gone">
+
+            <TextView
+                android:id="@+id/tv_total_steps_hint"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_above="@+id/tv_total_steps"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="5dip"
+                android:text="Total Steps:" />
+
+            <TextView
+                android:id="@+id/tv_total_steps"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="steps"
+                android:textColor="@color/black"
+                android:textSize="50sp" />
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+</RelativeLayout>

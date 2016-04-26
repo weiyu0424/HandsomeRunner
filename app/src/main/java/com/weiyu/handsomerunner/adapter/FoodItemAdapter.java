@@ -12,6 +12,7 @@ import com.weiyu.handsomerunner.R;
 import com.weiyu.handsomerunner.domain.Food;
 
 import java.util.List;
+import java.util.Random;
 
 /**
  * Created by Sam on 4/17/2016.
@@ -19,10 +20,12 @@ import java.util.List;
 public class FoodItemAdapter extends BaseAdapter {
     private List<Food> foods = null;
     private Context context = null;
+    private int[] images = null;
 
-    public FoodItemAdapter(Context context, List<Food> foods){
+    public FoodItemAdapter(Context context, List<Food> foods, int[] images){
         this.context = context;
         this.foods = foods;
+        this.images = images;
     }
 
 
@@ -59,11 +62,13 @@ public class FoodItemAdapter extends BaseAdapter {
             holder = (ViewHolder) view.getTag();
         }
 
+
+        Random random = new Random();
         Food food = foods.get(position);
         holder.tvFoodName.setText(food.getFoodName());
         holder.tvFatDescription.setText("fat:" + food.getFat() + "g");
         holder.tvCaloriesDescription.setText("calories:" + food.getCalories());
-
+        holder.ivFoodThumb.setImageResource(images[random.nextInt(images.length)]);
         return view;
     }
 

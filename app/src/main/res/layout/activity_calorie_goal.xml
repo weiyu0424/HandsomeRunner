@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/normal_background"
+    tools:context="com.weiyu.handsomerunner.view.CalorieGoalActivity">
+
+    <include layout="@layout/calorie_goal_set_header"/>
+
+    <TextView
+        android:id="@+id/tv_calorie_goal_hint"
+        android:layout_below="@+id/rl_calorie_goal_header"
+        android:text="Calorie goal hint"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dip"
+        android:layout_marginLeft="5dip"
+        android:textStyle="bold"
+        android:textColor="#000000"
+        android:textSize="18sp"/>
+
+    <LinearLayout
+        android:id="@+id/ll_calorie_add"
+        android:layout_below="@+id/tv_calorie_goal_hint"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dip"
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/et_calorie_add"
+            android:background="@drawable/bg_edit_text_add"
+            android:layout_width="0dip"
+            android:layout_weight="3"
+            android:layout_height="40dip"
+            android:paddingLeft="10dip"
+            android:hint="Please enter the calorie goal"
+            android:layout_marginRight="5dip"
+            android:layout_marginLeft="5dip"/>
+
+        <Button
+            android:id="@+id/bt_calorie_goal_add"
+            android:background="@drawable/bg_calorie_goal_add"
+            android:layout_width="0dip"
+            android:layout_weight="1"
+            android:layout_height="35dip"
+            android:text="ADD"
+            android:layout_marginRight="5dip"
+            android:textColor="@color/white"/>
+    </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/rl_calorie_show"
+        android:background="@drawable/bg_calorie"
+        android:layout_below="@+id/ll_calorie_add"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="40dip"
+        android:layout_width="280dip"
+        android:layout_height="280dip">
+        <TextView
+            android:id="@+id/tv_calorie"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="calorie"
+            android:textSize="50sp"
+            android:textColor="@color/black"
+            />
+
+        <TextView
+            android:id="@+id/tv_remaining"
+            android:layout_below="@+id/tv_calorie"
+            android:layout_centerHorizontal="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dip"
+            android:text="Calorie Remaining"/>
+    </RelativeLayout>
+
+
+</RelativeLayout>
