@@ -1,5 +1,7 @@
 package com.weiyu.handsomerunner.service;
 
+import android.text.TextUtils;
+
 import com.weiyu.handsomerunner.Config;
 import com.weiyu.handsomerunner.domain.Food;
 import com.weiyu.handsomerunner.network.HttpMethod;
@@ -69,6 +71,39 @@ public class FoodItemService {
             e.printStackTrace();
         }
         return null;
+    }
+
+    /**
+     * add daily diet
+     * @param userName
+     * @param foodId
+     * @param counts
+     * @param updateTime
+     * @param callback
+     */
+    public void addFoodItems(String userName, String foodId, String counts, String updateTime, final FoodItemCallback callback){
+        updateTime = updateTime.replace(" ","%20");
+        new NetConnection(Config.ADD_FOOD_ITEMS, HttpMethod.GET, new NetConnection.ConnectionCallback() {
+            @Override
+            public void onSuccess(String result) {
+                if(!TextUtils.isEmpty(result)){
+                    if(callback != null){
+                        callback.onSuccess(result);
+                    }
+                }else{
+                    if(callback != null){
+                        callback.onFail();
+                    }
+                }
+            }
+
+            @Override
+            public void onFail() {
+                if(callback != null){
+                    callback.onFail();
+                }
+            }
+        },userName,foodId,counts,updateTime);
     }
 
     /**

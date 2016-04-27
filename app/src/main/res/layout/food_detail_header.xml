@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rl_set_steps_header"
+    android:layout_width="match_parent"
+    android:layout_height="50dip"
+    android:background="@color/home_color">
+
+
+    <ImageView
+        android:id="@+id/iv_back_of_food_add"
+        android:layout_width="35dip"
+        android:layout_height="35dip"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="8dip"
+        android:src="@drawable/icon_return_back" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/iv_back_of_food_add"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="10dip"
+        android:text="@string/food_detail"
+        android:textColor="#ffffff"
+        android:textSize="20sp" />
+
+
+    <EditText
+        android:id="@+id/et_food_counts"
+        android:background="@drawable/bg_food_items_add"
+        android:layout_width="60dip"
+        android:layout_centerVertical="true"
+        android:layout_height="25dip"
+        android:inputType="number"
+        android:padding="5dip"
+        android:textSize="14sp"
+        android:textColorHint="@color/white"
+        android:textColor="@color/white"
+        android:hint="counts"
+        android:layout_toLeftOf="@+id/tv_food_items_add"
+        android:layout_marginRight="5dip"/>
+    <TextView
+        android:id="@+id/tv_food_items_add"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="10dip"
+        android:text="@string/add"
+        android:textColor="#ffffff"
+        android:textSize="16sp" />
+</RelativeLayout>

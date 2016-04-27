@@ -39,4 +39,7 @@
     <string name="edit">EDIT</string>
     <string name="set_steps">Set Steps</string>
     <string name="calculate">Calculate</string>
+    <string name="add">ADD</string>
+    <string name="food_detail">Food Detail</string>
+    <string name="food_item">food items</string>
 </resources>

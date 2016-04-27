@@ -1,13 +1,19 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context="com.weiyu.handsomerunner.fragment.ProgressReportFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="progress fragment" />
+    <com.viewpagerindicator.TabPageIndicator
+        android:id="@+id/tpi_navigator"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" />
 
-</FrameLayout>
+    <android.support.v4.view.ViewPager
+        android:id="@+id/vp_progress_report"
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+</LinearLayout>

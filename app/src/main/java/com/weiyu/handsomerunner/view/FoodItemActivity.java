@@ -22,30 +22,41 @@ import com.weiyu.handsomerunner.service.FatSecretAPIService;
 
 import java.util.List;
 
-public class FoodItemActivity extends AppCompatActivity {
+public class FoodItemActivity extends AppCompatActivity implements View.OnClickListener{
     private ListView lvFoodItems = null;
     private LinearLayout llFoodItems = null;
     private ImageView ivLoadOfFoodItems = null;
     private TextView tvLoadOfFoodItems = null;
+    private ImageView ivBackFoodItem = null;
+    private TextView tvTitleOfItems = null;
     private List<Food> foodItems = null;
     private int[] images = null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_food_item);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+//        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+//        setSupportActionBar(toolbar);
 
         initView();
 
         //receive the intent from HomeFragment
         Intent intent = getIntent();
         String category = intent.getStringExtra(Config.CATEGORY);
+
+//        getSupportActionBar().setTitle(category + " items");
+        tvTitleOfItems.setText(category + " items");
         if (NetworkUtils.isNetworkAvailable(this)) {
             getFoodItemsWithCategory(category);
         } else {
             Config.toast(this, "Oops, the network doesn't work, please enable the mobile data or connect to the WIFI");
         }
+
+        initEvent();
+    }
+
+    private void initEvent() {
+        ivBackFoodItem.setOnClickListener(this);
     }
 
     private void initView() {
@@ -55,6 +66,8 @@ public class FoodItemActivity extends AppCompatActivity {
         llFoodItems = (LinearLayout) findViewById(R.id.ll_food_items);
         ivLoadOfFoodItems = (ImageView) findViewById(R.id.iv_load_of_food_items);
         tvLoadOfFoodItems = (TextView) findViewById(R.id.tv_load_of_food_items);
+        ivBackFoodItem = (ImageView) findViewById(R.id.iv_back_food_item);
+        tvTitleOfItems = (TextView) findViewById(R.id.tv_title_of_items);
     }
 
 
@@ -133,4 +146,12 @@ public class FoodItemActivity extends AppCompatActivity {
     }
 
 
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.iv_back_food_item:
+                finish();
+                break;
+        }
+    }
 }

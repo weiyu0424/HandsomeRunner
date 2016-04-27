@@ -26,7 +26,7 @@
         </activity>
         <activity
             android:name=".view.HomeActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/MyTheme" />
         <activity android:name=".view.LoginActivity" />
         <activity android:name=".view.RegisterActivity" />
         <activity android:name=".view.DataEntryActivity" />

@@ -6,6 +6,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CalendarView;
 import android.widget.TextView;
 
 import com.weiyu.handsomerunner.Config;
@@ -37,6 +38,7 @@ public class CalorieTrackFragment extends Fragment {
         view = inflater.inflate(R.layout.fragment_calorie_track, container, false);
         initView();
         initData();
+
         return view;
     }
 
@@ -82,7 +84,7 @@ public class CalorieTrackFragment extends Fragment {
             /**
              * get consumed calorie
              */
-            goaledCalorieService.getConsumedAndBurnedCalories("Alex", "2016-03-24", new GoaledCalorieService.GoaledCalorieCallback() {
+            goaledCalorieService.getConsumedAndBurnedCalories(Config.getUserName(getActivity()), Config.today(), new GoaledCalorieService.GoaledCalorieCallback() {
                 @Override
                 public void onSuccess(Object obj) {
                     String result = (String) obj;

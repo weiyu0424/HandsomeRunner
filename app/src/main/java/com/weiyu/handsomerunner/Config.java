@@ -39,6 +39,12 @@ public class Config {
      * query food by a category, in this app. I adopt a vague recognition
      */
     public static final String QUERY_FOOD_BY＿CATEGORY = "http://172.16.120.11:8080/CaloriesServer/webresources/food/findByCategory";
+
+
+    public static final String ADD_FOOD_ITEMS = "http://172.16.120.11:8080/CaloriesServer/webresources/consumerecord/addConsumeRecord";
+
+    public static final String QUERY_REPORT_RECORDS = "http://172.16.120.11:8080/CaloriesServer/webresources/report/queryReportsBetweenTimePeriod";
+
     public static final String USER_NAME = "userName";
     public static final String PASSWORD = "password";
     public static final String TOTAL_STEPS = "totalSteps";
@@ -138,6 +144,19 @@ public class Config {
     public static String today(){
         long timeMillis = System.currentTimeMillis();
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        Date date = new Date(timeMillis);
+        String currentTime = format.format(date);
+        return currentTime;
+    }
+
+
+    /**
+     * get current time which contains hour,minute and second
+     * @return: a string-type concrete time
+     */
+    public static String getConcreteTime(){
+        long timeMillis = System.currentTimeMillis();
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
         Date date = new Date(timeMillis);
         String currentTime = format.format(date);
         return currentTime;
