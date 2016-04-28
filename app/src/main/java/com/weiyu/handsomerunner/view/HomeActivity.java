@@ -1,5 +1,6 @@
 package com.weiyu.handsomerunner.view;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
@@ -9,16 +10,20 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.weiyu.handsomerunner.Config;
 import com.weiyu.handsomerunner.R;
 import com.weiyu.handsomerunner.fragment.CalorieGoalFragment;
 import com.weiyu.handsomerunner.fragment.CalorieTrackFragment;
@@ -52,8 +57,10 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     private TextView tvHome = null;
     private TextView tvCalorieTrack = null;
     private TextView tvProgressReport = null;
-
+    private Button btLogout = null;
     private FragmentManager fm = null;
+
+    private TextView tvUserName = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,7 +83,18 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 
         fm = getSupportFragmentManager();
 
+        initData();
+    }
+
+    private void initData() {
         setTabSelection(0);
+        String userName = Config.getUserName(this);
+        if(!TextUtils.isEmpty(userName)){
+            tvUserName.setText(userName);
+        }else{
+            tvUserName.setText(R.string.no_login);
+            btLogout.setText(R.string.login);
+        }
     }
 
 
@@ -98,6 +116,10 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         tvProgressReport = (TextView) findViewById(R.id.tv_progress_report);
 
         navigationView = (NavigationView) findViewById(R.id.nav_view);
+        View view = navigationView.inflateHeaderView(R.layout.nav_header_main2);
+        tvUserName = (TextView) view.findViewById(R.id.tv_user_name);
+        btLogout = (Button) view.findViewById(R.id.bt_logout);
+
     }
 
     /**
@@ -108,6 +130,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         llCalorieTrackPage.setOnClickListener(this);
         llProgressReportPage.setOnClickListener(this);
         navigationView.setNavigationItemSelectedListener(this);
+        btLogout.setOnClickListener(this);
     }
 
 
@@ -293,6 +316,26 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                 //if the progress report page icon is selected,replace the FrameLayout with ProgressReport
                 setTabSelection(2);
                 break;
+            case R.id.bt_logout:
+                if(btLogout.getText().equals(getString(R.string.login))){
+                    Intent intent = new Intent(this,LoginActivity.class);
+                    startActivity(intent);
+                }else {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(HomeActivity.this);
+                    builder.setMessage("Do you really want to logout from the app?");
+                    builder.setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            Config.setLogin(HomeActivity.this, "", false);
+                            Config.toast(HomeActivity.this, "have successfully logged out from the app");
+                            btLogout.setText(R.string.login);
+                        }
+                    });
+
+                    builder.setNegativeButton("Cancel", null);
+                    builder.show();
+                }
+                break;
         }
     }
 
@@ -300,6 +343,6 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     @Override
     protected void onResume() {
         super.onResume();
-        setTabSelection(0);
+        initData();
     }
 }

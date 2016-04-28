@@ -221,6 +221,10 @@ public class WeeklyProgressReportFragment extends Fragment implements View.OnCli
     }
 
 
+    /**
+     * initialize line graph
+     * @param reports: pass the data
+     */
     private void initLineGraph(List<Report> reports) {
         lineChart.setDrawGridBackground(false);
 
@@ -357,5 +361,11 @@ public class WeeklyProgressReportFragment extends Fragment implements View.OnCli
                 });
                 break;
         }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        initData();
     }
 }

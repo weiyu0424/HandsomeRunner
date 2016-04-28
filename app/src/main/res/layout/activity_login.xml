@@ -1,32 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
+    android:background="@color/normal_background"
     tools:context="com.weiyu.handsomerunner.view.LoginActivity">
+
+    <include layout="@layout/login_header"/>
     <LinearLayout
+        android:background="@drawable/bg_login_panel"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="300dip"
         android:layout_margin="10dip"
+        android:layout_centerInParent="true"
+        android:gravity="center"
         android:orientation="vertical"
         >
         <EditText
             android:id="@+id/et_userName"
+            android:background="@drawable/bg_edit_text_login"
             android:hint="user name"
             android:singleLine="true"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:paddingLeft="8dip"
+            android:layout_height="35dip" />
         <EditText
             android:id="@+id/et_password"
+            android:background="@drawable/bg_edit_text_login"
             android:hint="password"
+            android:paddingLeft="8dip"
+            android:inputType="textPassword"
+            android:layout_marginTop="10dip"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="35dip" />
 
         <Button
             android:id="@+id/bt_sign_in"
+            android:background="@drawable/bg_login"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="35dip"
+            android:layout_marginTop="15dip"
+            android:textColor="@color/white"
             android:text="@string/sign_in"
             />
 
@@ -35,9 +49,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:layout_marginTop="10dip"
+            android:layout_marginTop="20dip"
             android:textStyle="bold|italic"
-            android:textColor="#01a6a9"
+            android:textColor="@color/home_color"
             android:text="@string/sign_up"/>
     </LinearLayout>
-</LinearLayout>
+</RelativeLayout>

@@ -7,6 +7,7 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.Spinner;
 
@@ -23,12 +24,14 @@ public class DataEntryActivity extends AppCompatActivity implements View.OnClick
     private EditText etAge = null;
     private EditText etHeight = null;
     private EditText etWeight = null;
+    private EditText etSteps = null;
     private RadioButton rbMale = null;
     private RadioButton rbFemale = null;
     private Button btSignUp = null;
     private Spinner spLevel = null;
     private String userName = null;
     private String password = null;
+    private ImageView ivBackOfDataset = null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,15 +49,18 @@ public class DataEntryActivity extends AppCompatActivity implements View.OnClick
         etAge = (EditText) findViewById(R.id.et_age);
         etHeight = (EditText) findViewById(R.id.et_height);
         etWeight = (EditText) findViewById(R.id.et_weight);
+        etSteps = (EditText) findViewById(R.id.et_steps);
         rbMale = (RadioButton) findViewById(R.id.rb_male);
         rbFemale = (RadioButton) findViewById(R.id.rb_female);
         btSignUp = (Button) findViewById(R.id.bt_sign_up);
         spLevel = (Spinner) findViewById(R.id.sp_level);
+        ivBackOfDataset = (ImageView) findViewById(R.id.iv_back_register);
     }
 
 
     private void initEvent() {
         btSignUp.setOnClickListener(this);
+        ivBackOfDataset.setOnClickListener(this);
     }
 
     @Override
@@ -62,6 +68,9 @@ public class DataEntryActivity extends AppCompatActivity implements View.OnClick
         switch (v.getId()){
             case R.id.bt_sign_up:
                 signUp();
+                break;
+            case R.id.iv_back_register:
+                finish();
                 break;
         }
     }
@@ -74,6 +83,7 @@ public class DataEntryActivity extends AppCompatActivity implements View.OnClick
         String age = etAge.getText().toString().trim();
         String height = etHeight.getText().toString().trim();
         String weight = etWeight.getText().toString().trim();
+        String steps = etSteps.getText().toString().trim();
         String gender = null;
         if(rbMale.isChecked()){
             gender = "male";
@@ -87,6 +97,8 @@ public class DataEntryActivity extends AppCompatActivity implements View.OnClick
             Config.toast(this,"height can not be empty");
         }else if(TextUtils.isEmpty(weight)){
             Config.toast(this,"weight can not be empty");
+        }else if(TextUtils.isEmpty(steps)){
+            Config.toast(this,"steps can not be empty");
         }else{
             long selectedItemId = spLevel.getSelectedItemId();
             final User user = new User();
@@ -95,6 +107,7 @@ public class DataEntryActivity extends AppCompatActivity implements View.OnClick
             user.setAge(Integer.parseInt(age));
             user.setHeight(Double.parseDouble(height));
             user.setWeight(Double.parseDouble(weight));
+            user.setSteps(Double.parseDouble(steps));
             user.setLevel((int)(selectedItemId + 1));
             user.setGender(gender);
 

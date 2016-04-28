@@ -7,6 +7,7 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 
 import com.weiyu.handsomerunner.Config;
 import com.weiyu.handsomerunner.R;
@@ -16,6 +17,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     private EditText etPassword = null;
     private EditText etPasswordConfirm = null;
     private Button btNextStep = null;
+    private ImageView ivBackOfRegister = null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,11 +31,13 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         etPassword = (EditText) findViewById(R.id.et_password);
         etPasswordConfirm = (EditText) findViewById(R.id.et_password_confirm);
         btNextStep = (Button) findViewById(R.id.bt_next_step);
+        ivBackOfRegister = (ImageView) findViewById(R.id.iv_back_register);
     }
 
 
     private void initEvent() {
         btNextStep.setOnClickListener(this);
+        ivBackOfRegister.setOnClickListener(this);
     }
 
     @Override
@@ -42,6 +46,9 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
             case R.id.bt_next_step:
                 //go to the next step to fill in more detail about the user information
                 nextStep();
+                break;
+            case R.id.iv_back_register:
+                finish();
                 break;
         }
     }

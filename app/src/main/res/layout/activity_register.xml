@@ -4,8 +4,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@color/normal_background"
     tools:context="com.weiyu.handsomerunner.view.RegisterActivity">
+
+    <include layout="@layout/register_header"/>
     <LinearLayout
+        android:background="@drawable/bg_login_panel"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_margin="10dip"
@@ -13,32 +17,42 @@
         >
         <EditText
             android:id="@+id/et_userName"
+            android:background="@drawable/bg_edit_text_login"
+            android:paddingLeft="10dip"
             android:hint="user name"
             android:singleLine="true"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="35dip" />
 
 
         <EditText
             android:id="@+id/et_password"
+            android:background="@drawable/bg_edit_text_login"
             android:inputType="textPassword"
+            android:paddingLeft="10dip"
             android:hint="password"
+            android:layout_marginTop="5dip"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="35dip" />
 
 
         <EditText
             android:id="@+id/et_password_confirm"
+            android:background="@drawable/bg_edit_text_login"
             android:inputType="textPassword"
+            android:paddingLeft="10dip"
+            android:layout_marginTop="5dip"
             android:hint="password confirm"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="35dip" />
 
         <Button
             android:id="@+id/bt_next_step"
+            android:background="@drawable/bg_login"
             android:layout_marginTop="20dip"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:layout_height="35dip"
             android:text="next step"
             />
 

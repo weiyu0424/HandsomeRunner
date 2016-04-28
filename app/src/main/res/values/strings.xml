@@ -42,4 +42,6 @@
     <string name="add">ADD</string>
     <string name="food_detail">Food Detail</string>
     <string name="food_item">food items</string>
+    <string name="login">Login</string>
+    <string name="no_login">no login</string>
 </resources>

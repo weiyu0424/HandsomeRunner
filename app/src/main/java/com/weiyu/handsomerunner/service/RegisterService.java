@@ -31,7 +31,7 @@ public class RegisterService {
                 }
             }
         }, user.getUserName(), user.getPassword(), user.getAge() + "",
-                user.getGender(), user.getHeight() + "", user.getWeight() + "", user.getLevel() + "");
+                user.getGender(), user.getHeight() + "", user.getWeight() + "", user.getSteps() + "", user.getLevel() + "");
     }
 
 

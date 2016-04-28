@@ -7,6 +7,7 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.weiyu.handsomerunner.Config;
@@ -21,6 +22,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private EditText etPassword = null;
     private Button btSignIn = null;
     private TextView tvSignUp = null;
+    private ImageView ivBackOfLogin = null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,11 +44,13 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         etPassword = (EditText) findViewById(R.id.et_password);
         btSignIn = (Button) findViewById(R.id.bt_sign_in);
         tvSignUp = (TextView) findViewById(R.id.tv_sign_up);
+        ivBackOfLogin = (ImageView) findViewById(R.id.iv_back_login);
     }
 
     private void initEvent() {
         btSignIn.setOnClickListener(this);
         tvSignUp.setOnClickListener(this);
+        ivBackOfLogin.setOnClickListener(this);
     }
 
     @Override
@@ -61,6 +65,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 //if a user clicks the sign up button, app will redirect to a sign up activity
                 intent = new Intent(LoginActivity.this, RegisterActivity.class);
                 startActivity(intent);
+                break;
+
+            case R.id.iv_back_login:
+                finish();
                 break;
         }
     }
@@ -89,7 +97,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                         if(1 == status){
                             Config.toast(LoginActivity.this,"login success");
                             //after login, we should set the login status as true
-                            Config.setLogin(LoginActivity.this,userName);
+                            Config.setLogin(LoginActivity.this,userName,true);
 
                             //redirect to the home activity after successfully login
                             Intent intent = new Intent(LoginActivity.this,HomeActivity.class);

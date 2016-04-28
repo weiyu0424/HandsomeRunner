@@ -125,4 +125,9 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
         startActivity(intent);
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        initData();
+    }
 }

@@ -84,9 +84,9 @@ public class Config {
      * @param context: the current environment
      * @param userName: the userName which need to be cached
      */
-    public static void setLogin(Context context,String userName){
+    public static void setLogin(Context context,String userName,boolean isLogin){
         SharedPreferences.Editor editor = context.getSharedPreferences(APP_ID, Context.MODE_PRIVATE).edit();
-        editor.putBoolean(KEY_TOKEN,true);
+        editor.putBoolean(KEY_TOKEN,isLogin);
         editor.putString(USER_NAME,userName);
         editor.commit();
     }
