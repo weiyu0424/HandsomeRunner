@@ -7,10 +7,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CalendarView;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.weiyu.handsomerunner.Config;
 import com.weiyu.handsomerunner.R;
+import com.weiyu.handsomerunner.adapter.DailyDietAdapter;
+import com.weiyu.handsomerunner.db.DBDailyDietHandler;
+import com.weiyu.handsomerunner.domain.DailyDiet;
 import com.weiyu.handsomerunner.network.NetworkUtils;
 import com.weiyu.handsomerunner.service.GoaledCalorieService;
 
@@ -18,6 +22,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.text.DecimalFormat;
+import java.util.List;
 
 public class CalorieTrackFragment extends Fragment {
     private TextView tvCalorieGoalDescription = null;
@@ -26,6 +31,7 @@ public class CalorieTrackFragment extends Fragment {
     private TextView tvSteps = null;
     private TextView tvConsumedCalorie = null;
     private TextView tvBurnedCalorie = null;
+    private ListView lvDailyDiet = null;
     public CalorieTrackFragment() {
 
     }
@@ -42,12 +48,14 @@ public class CalorieTrackFragment extends Fragment {
         return view;
     }
 
+
     private void initView() {
         tvCalorieGoalDescription = (TextView) view.findViewById(R.id.tv_calorie_goal_description);
         tvCalorieGoal = (TextView) view.findViewById(R.id.tv_calorie_goal);
         tvConsumedCalorie = (TextView) view.findViewById(R.id.tv_calorie_consumed);
         tvBurnedCalorie = (TextView) view.findViewById(R.id.tv_calorie_burned);
         tvSteps = (TextView) view.findViewById(R.id.tv_steps_of_calorie_track);
+        lvDailyDiet = (ListView) view.findViewById(R.id.lv_daily_diet);
     }
 
 
@@ -112,9 +120,18 @@ public class CalorieTrackFragment extends Fragment {
                 }
             });
 
+            /**
+             * get daily diet records
+             */
+            List<DailyDiet> dailyDiets = new DBDailyDietHandler(getActivity()).queryDailyDietByTime(Config.today());
+            DailyDietAdapter adapter = new DailyDietAdapter(getActivity(),dailyDiets);
+            lvDailyDiet.setAdapter(adapter);
+
         }else{
             Config.toast(getActivity(),"Oops, current network does not work!");
         }
+
+
     }
 
     @Override

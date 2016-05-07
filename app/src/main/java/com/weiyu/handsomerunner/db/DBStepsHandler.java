@@ -36,7 +36,7 @@ public class DBStepsHandler {
         ContentValues contentValues = new ContentValues();
         contentValues.put(StepsUtils.USERNAME, userName);
         contentValues.put(StepsUtils.STEPS,steps);
-
+        contentValues.put(StepsUtils.UPDATETIME,Config.getConcreteTime());
         db.insert(StepsUtils.TABLE_NAME,null,contentValues);
     }
 

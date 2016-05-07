@@ -19,7 +19,9 @@ import com.squareup.picasso.Picasso;
 import com.weiyu.handsomerunner.Config;
 import com.weiyu.handsomerunner.R;
 import com.weiyu.handsomerunner.adapter.FoodDetailAdapter;
+import com.weiyu.handsomerunner.db.DBDailyDietHandler;
 import com.weiyu.handsomerunner.domain.Bing;
+import com.weiyu.handsomerunner.domain.DailyDiet;
 import com.weiyu.handsomerunner.domain.Food;
 import com.weiyu.handsomerunner.domain.FoodItem;
 import com.weiyu.handsomerunner.network.SearchMethod;
@@ -39,7 +41,7 @@ public class FoodDetailActivity extends AppCompatActivity implements View.OnClic
     private EditText etFoodCounts = null;
     private TextView tvFoodItemsAdd = null;
     private ImageView ivBackOfFoodAdd = null;
-
+    private Bing bing = null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -95,7 +97,9 @@ public class FoodDetailActivity extends AppCompatActivity implements View.OnClic
         });
 
 
-        //retrieved description and images from bing
+        /**
+         * retrieved description and images from bing
+         */
         new SearchService().search(food.getFoodName(), 1, SearchMethod.WEB, new SearchService.SearchSearviceCallback() {
             @Override
             public void onSuccess(Object obj) {
@@ -109,10 +113,14 @@ public class FoodDetailActivity extends AppCompatActivity implements View.OnClic
             }
         });
 
+
+        /**
+         * retrieve food image from bing search engine
+         */
         new SearchService().search(food.getFoodName(), 1, SearchMethod.IMAGE, new SearchService.SearchSearviceCallback() {
             @Override
             public void onSuccess(Object obj) {
-                Bing bing = (Bing) obj;
+                bing = (Bing) obj;
                 Picasso.with(FoodDetailActivity.this).load(bing.getMediaUrl()).into(ivFoodImage);
             }
 
@@ -157,6 +165,18 @@ public class FoodDetailActivity extends AppCompatActivity implements View.OnClic
                         @Override
                         public void onSuccess(Object result) {
                             Config.toast(FoodDetailActivity.this,"successfuly add daily diet to the server");
+
+                            /**
+                             * after successfully insert the daily diet to the server, store it again to the database
+                             */
+                            DailyDiet dailyDiet = new DailyDiet();
+                            dailyDiet.setFoodId(food.getFoodId());
+                            dailyDiet.setFoodName(food.getFoodName());
+                            dailyDiet.setCount(Integer.parseInt(foodNums));
+                            if(bing != null){
+                                dailyDiet.setFoodImageUrl(bing.getMediaUrl());
+                            }
+                            new DBDailyDietHandler(FoodDetailActivity.this).insertDailyDiet(dailyDiet);
                         }
 
                         @Override

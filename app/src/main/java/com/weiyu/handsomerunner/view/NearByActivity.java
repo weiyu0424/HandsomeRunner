@@ -3,6 +3,7 @@ package com.weiyu.handsomerunner.view;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageView;
 
 import com.baidu.location.BDLocation;
@@ -40,8 +41,15 @@ public class NearByActivity extends AppCompatActivity implements BDLocationListe
     private BaiduMap mBaiduMap = null;
     private PoiSearch poiSearch = null;
     private boolean isFirstLocation = true;
+    private EditText etSearch = null;
+    private ImageView ivSearch = null;
 
     private ImageView ivBackOfNearBy = null;
+    private LatLng ll = null;
+    /**
+     * marker icons
+     */
+    private int[] markers = {R.drawable.icon_marka,R.drawable.icon_markb,R.drawable.icon_markc,R.drawable.icon_markd,R.drawable.icon_marke,R.drawable.icon_markf,R.drawable.icon_markg,R.drawable.icon_markh,R.drawable.icon_marki,R.drawable.icon_markj};
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,6 +64,8 @@ public class NearByActivity extends AppCompatActivity implements BDLocationListe
     private void initView() {
         mapView = (TextureMapView) findViewById(R.id.bmapView);
         ivBackOfNearBy = (ImageView) findViewById(R.id.iv_back_near_by);
+        etSearch = (EditText) findViewById(R.id.et_search);
+        ivSearch = (ImageView) findViewById(R.id.iv_search);
     }
 
     /**
@@ -90,6 +100,7 @@ public class NearByActivity extends AppCompatActivity implements BDLocationListe
         });
 
         ivBackOfNearBy.setOnClickListener(this);
+        ivSearch.setOnClickListener(this);
     }
 
 
@@ -114,6 +125,11 @@ public class NearByActivity extends AppCompatActivity implements BDLocationListe
         mapView.onPause();
     }
 
+
+    /**
+     * auto locate the position of a user, in this method, the app can get the concrete coordinator
+     * @param location
+     */
     @Override
     public void onReceiveLocation(BDLocation location) {
         if (location == null || mapView == null) {
@@ -128,30 +144,43 @@ public class NearByActivity extends AppCompatActivity implements BDLocationListe
 
         if(isFirstLocation) {
             isFirstLocation = false;
-            LatLng ll = new LatLng(location.getLatitude(),
+            ll = new LatLng(location.getLatitude(),
                     location.getLongitude());
             MapStatus.Builder builder = new MapStatus.Builder();
-            builder.target(ll).zoom(18.0f);
+            builder.target(ll).zoom(17.0f);
             mBaiduMap.animateMapStatus(MapStatusUpdateFactory.newMapStatus(builder.build()));
-
             poiSearch = PoiSearch.newInstance();
-            poiSearch.setOnGetPoiSearchResultListener(this);
-            poiSearch.searchNearby(new PoiNearbySearchOption().location(ll).keyword("公园").pageNum(0).radius(5000));
+            searchByKeyWords("公园");
         }
 
+    }
+
+
+    /**
+     * search places by keyword in the Baidu Map
+     * @param keyword:
+     */
+    private void searchByKeyWords(String keyword) {
+        mBaiduMap.clear();
+        poiSearch.setOnGetPoiSearchResultListener(this);
+        poiSearch.searchNearby(new PoiNearbySearchOption().location(ll).keyword(keyword).pageNum(0).radius(5000));
     }
 
     @Override
     public void onGetPoiResult(PoiResult poiResult) {
         List<PoiInfo> poiInfos = poiResult.getAllPoi();
         System.out.println("size:" + poiInfos.size());
-        for (PoiInfo poiInfo : poiInfos) {
+
+        for(int i = 0;i < poiInfos.size();i++){
+            markSearchResult(poiInfos.get(i),i);
+        }
+        /*for (PoiInfo poiInfo : poiInfos) {
 //            String address = poiInfo.address;
 //            String name = poiInfo.name;
 //            System.out.println(address + ":" + name);
 //            LatLng location = poiInfo.location;
             markSearchResult(poiInfo);
-        }
+        }*/
     }
 
     @Override
@@ -160,21 +189,25 @@ public class NearByActivity extends AppCompatActivity implements BDLocationListe
     }
 
 
-
-    public void markSearchResult(PoiInfo point) {
-        //定义Maker坐标点
+    /**
+     * this method can be used to create a marker
+     * @param point: the given position which need to be created a marker
+     * @param index: the marker index, different marker has different icon
+     */
+    public void markSearchResult(PoiInfo point,int index) {
 //        LatLng point = new LatLng(39.963175, 116.400244);
-        //构建Marker图标
+        //build a Marker icon
         BitmapDescriptor bitmap = BitmapDescriptorFactory
-                .fromResource(R.drawable.icon_marka);
-        //构建MarkerOption，用于在地图上添加Marker
+                .fromResource(markers[index]);
+
+        //create a MarkerOption, which can be used to add marker
         OverlayOptions option = new MarkerOptions()
                 .position(point.location)
                 .icon(bitmap)
                 .draggable(true)
                 .zIndex(9);
 
-        //在地图上添加Marker，并显示
+        //add Marker in the Baidu Map and display it in the map
         Marker marker = (Marker) (mBaiduMap.addOverlay(option));
         marker.setTitle(point.name + ":" + point.address);
         marker.setPosition(point.location);
@@ -186,6 +219,17 @@ public class NearByActivity extends AppCompatActivity implements BDLocationListe
         switch (v.getId()){
             case R.id.iv_back_near_by:
                 finish();
+                break;
+            case R.id.iv_search:
+                /**
+                 * if edit text is not visible, set edit text visible
+                 */
+                if(etSearch.getVisibility() == View.GONE){
+                    etSearch.setVisibility(View.VISIBLE);
+                }else{
+                    String searchContent = etSearch.getText().toString().trim();
+                    searchByKeyWords(searchContent);
+                }
                 break;
         }
     }

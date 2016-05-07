@@ -11,7 +11,7 @@
         android:layout_width="35dip"
         android:layout_height="35dip"
         android:layout_centerVertical="true"
-        android:layout_marginLeft="8dip"
+        android:layout_marginLeft="5dip"
         android:src="@drawable/icon_return_back" />
 
     <TextView
@@ -22,5 +22,28 @@
         android:text="Map"
         android:textColor="#ffffff"
         android:textSize="20sp" />
+
+    <EditText
+        android:id="@+id/et_search"
+        android:background="@drawable/bg_edit_text_search"
+        android:layout_width="match_parent"
+        android:layout_toRightOf="@id/iv_back_near_by"
+        android:layout_toLeftOf="@+id/iv_search"
+        android:layout_height="35dip"
+        android:textColorHint="@color/home_color"
+        android:paddingLeft="5dip"
+        android:hint="Enter places you want to search"
+        android:layout_marginRight="3dip"
+        android:visibility="gone"
+        android:layout_centerInParent="true"/>
+
+    <ImageView
+        android:id="@+id/iv_search"
+        android:layout_width="30dip"
+        android:layout_height="30dip"
+        android:layout_marginRight="5dip"
+        android:src="@drawable/icon_bg_search"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"/>
 
 </RelativeLayout>

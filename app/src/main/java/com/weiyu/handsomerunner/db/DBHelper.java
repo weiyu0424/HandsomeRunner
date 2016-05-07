@@ -8,7 +8,7 @@ import android.database.sqlite.SQLiteOpenHelper;
  * created by Sam on 4/14/2016
  */
 public class DBHelper extends SQLiteOpenHelper {
-    public static final int VERSION = 2;
+    public static final int VERSION = 3;
     public static final String DATABASE_NAME = "id27315932";
     public static final String CREATE_TABLE_USER = "CREATE TABLE IF NOT EXISTS user(" +
             "_id integer primary key autoincrement," +
@@ -41,6 +41,16 @@ public class DBHelper extends SQLiteOpenHelper {
             "updateTime datetime default CURRENT_TIMESTAMP not null" +
             ");";
 
+
+    public static final String CREATE_TABLE_DAILY_DIET = "CREATE TABLE IF NOT EXISTS daily_diet(" +
+            "_id integer primary key autoincrement," +
+            "foodId varchar(50) not null," +
+            "foodName varchar(100) not null," +
+            "userName varchar(50) not null," +
+            "counts int not null," +
+            "updateTime datetime default CURRENT_TIMESTAMP not null" +
+            ");";
+
     public DBHelper(Context context) {
         super(context, DATABASE_NAME, null, VERSION);
     }
@@ -55,6 +65,10 @@ public class DBHelper extends SQLiteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         System.out.println("on upgrade");
-        db.execSQL(CREATE_TABLE_STEPS);
+        if(1 == oldVersion && 2 == newVersion) {
+            db.execSQL(CREATE_TABLE_STEPS);
+        }else if(2 == oldVersion && 3 == newVersion){
+            db.execSQL(CREATE_TABLE_DAILY_DIET);
+        }
     }
 }
